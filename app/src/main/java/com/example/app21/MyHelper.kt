@@ -37,7 +37,6 @@ class MyHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, 1) {
         var list = ArrayList<Staff>()
         var db = this.readableDatabase
         var c = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
-        var s = Staff("", "")
         if (c != null){
             if(c.moveToFirst()){
                 do{
