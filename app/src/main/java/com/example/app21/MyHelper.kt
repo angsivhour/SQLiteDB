@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 val DB_NAME = "StaffDB"
 val TABLE_NAME = "Staff"
@@ -30,6 +31,23 @@ class MyHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, 1) {
         var res = db.insert(TABLE_NAME, null, cv)
 
         return res
+    }
+
+    fun readRecord(): ArrayList<Staff>{
+        var list = ArrayList<Staff>()
+        var db = this.readableDatabase
+        var c = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+        var s = Staff("", "")
+        if (c != null){
+            if(c.moveToFirst()){
+                do{
+                    var city = c.getString(c.getColumnIndex(COL1))
+                    var name = c.getString(c.getColumnIndex(COL2))
+                    list.add(Staff(city, name))
+                }while (c.moveToNext())
+            }
+        }
+        return list
     }
 
 }
