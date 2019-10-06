@@ -15,15 +15,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-
     fun insert(v: View){
         var city: String = city.text.toString()
         var name: String = name.text.toString()
 
         var dto1 = Staff(city, name)
-
         var helper = MyHelper(this)
-
         var res = helper.insertData(dto1)
 
         if(res == (-1).toLong()){
